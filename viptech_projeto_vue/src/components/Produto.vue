@@ -1,16 +1,13 @@
 <template>
   <div>
     <div id="nome">
-      <div class="imagem">
-        <img :src="im3" :alt="alt" />
-      </div>
       <div class="descricao">
         <div class="produto" v-for="dado in dados" :key="dado.null">
           <h3>{{ dado.nome }}</h3>
           <p>{{ dado.marca }}</p>
           <p>R$ {{ dado.valor }},00</p>
           <p>Cor: {{ dado.cor }}</p>
-          <!-- <p>{{dado.imagem}}</p> -->
+          <img :src="dado.imagem" alt="imagem">
           <div class="botoes"><Icons :id="dado.id "/></div>
         </div>
       </div>
@@ -37,9 +34,6 @@ export default {
   created() {
     this.getProduto();
   },
-//  created() {
-//     this.deleteById(id);
-//   },
 
   methods: {
     getProduto() {

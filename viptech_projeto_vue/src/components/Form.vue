@@ -34,7 +34,8 @@
         <input type="date" placeholder="00/00/0000" />
       </div>
       <div class="text">
-        <input type="file" />
+        <img :src="imagem" alt="imagem">
+        <input @change="handleImage" type="file" />
       </div>
       <div class="text">
         <button type="submit">Adicionar Produto</button>
@@ -53,6 +54,7 @@ export default {
       marca: "",
       valor: 0,
       cor: "",
+      imagem: ""
     };
   },
   methods: {
@@ -63,6 +65,8 @@ export default {
           marca: this.marca,
           valor: this.valor,
           cor: this.cor,
+          imagem: this.imagem
+        
         })
         .then((res) => {
           console.log(res);
@@ -70,6 +74,19 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+    },
+    handleImage(e) {
+      const selectedImage = e.target.files[0];
+      this.createBase64Image(selectedImage);
+    },
+    createBase64Image(fileObject){
+      fileObject.text().then(()=> {
+        const reader = new FileReader();
+        reader.readAsDataURL(fileObject);
+        reader.onload = () => {
+        this.imagem = reader.result;
+      };
+      })
     },
   },
 };
