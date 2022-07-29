@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="form">
     <form v-on:submit.prevent="postProduto">
       <div class="text">
         <label>Nome do produto:</label>
@@ -10,7 +10,7 @@
         />
       </div>
       <div class="text">
-        <label>Marca</label>
+        <label>Marca:</label>
         <input
           type="text"
           v-model="marca"
@@ -18,11 +18,11 @@
         />
       </div>
       <div class="text">
-        <label>Valor</label>
+        <label>Valor:</label>
         <input type="number" v-model="valor" placeholder="R$00,00" />
       </div>
       <div class="text">
-        <label>Cor</label>
+        <label>Cor:</label>
         <input
           type="text"
           v-model="cor"
@@ -30,15 +30,16 @@
         />
       </div>
       <div class="text">
-        <label>Data de Cadastro</label>
-        <input type="date" placeholder="00/00/0000" />
+        <label>Data de Cadastro:</label>
+        <input type="date" :value="myDate && new Date(myDate.getTime()-(myDate.getTimezoneOffset()*60*1000)).toISOString().split('T')[0]"
+                   @input="myDate = $event.target.valueAsDate">
       </div>
       <div class="text">
         <img :src="imagem" alt="imagem">
         <input @change="handleImage" type="file" />
       </div>
       <div class="text">
-        <button type="submit">Adicionar Produto</button>
+        <button class="submit-btn" type="submit">ADICIONAR PRODUTO</button>
       </div>
     </form>
   </div>
@@ -54,7 +55,8 @@ export default {
       marca: "",
       valor: 0,
       cor: "",
-      imagem: ""
+      imagem: "",
+      date: new Date().toISOString().substr(0, 10)
     };
   },
   methods: {
@@ -94,16 +96,32 @@ export default {
 
 <style scoped>
 #form {
-  max-width: 400px;
+  max-width: 550px;
   margin: 0 auto;
+  font-family: 'Raleway';
+ 
 }
 .text {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+   
 }
 label {
   font-weight: bold;
   margin-bottom: 15px;
+  color: #222;
+  padding: 5px 10px;
 }
+input, select {
+  padding: 5px 10px;
+}
+
+.submit-btn {
+  background-color: #00264B;
+  width: 150px;
+  height: 35px;
+  color: blanchedalmond;
+}
+
 </style>

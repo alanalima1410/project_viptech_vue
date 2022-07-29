@@ -1,18 +1,23 @@
 <template>
   <div>
-    <div id="nome">
-      <div class="descricao">
-        <div class="produto" v-for="dado in dados" :key="dado.null">
-          <h3>{{ dado.nome }}</h3>
-          <p>{{ dado.marca }}</p>
-          <p>R$ {{ dado.valor }},00</p>
-          <p>Cor: {{ dado.cor }}</p>
+    
+    <div>
+      
+        <div  id="nome" v-for="dado in dados" :key="dado.null">
+          <div class="imagem">
           <img :src="dado.imagem" alt="imagem">
+          </div>
+          <div class="descricao">
+            <h3>{{ dado.nome }}</h3>
+            <p>{{ dado.marca }}</p>
+            <p class="cif">R$ {{ dado.valor }},00</p>
+            <p>Cor: {{ dado.cor }}</p>
+          </div>
           <div class="botoes"><Icons :id="dado.id "/></div>
         </div>
       </div>
     </div>
-  </div>
+  
 </template>
 
 <script>
@@ -60,6 +65,7 @@ export default {
   height: 100%;
   width: 100%;
   justify-content: center;
+  font-family: 'Raleway';
 }
 .imagem {
   width: 150px;
@@ -72,12 +78,18 @@ export default {
   margin-left: 50px;
 }
 .botoes {
-  width: 250px;
+  /* width: 250px; */
   height: 180px;
   align-items: center;
-  margin-top: -120px;
+  /* margin-top: -120px; */
 }
 .produto {
   margin-bottom: 100px;
+}
+.cif {
+  color: #0F4C81;
+  font-weight: bold;
+  font-size: 20px;
+  
 }
 </style>

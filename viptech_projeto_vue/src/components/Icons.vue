@@ -27,8 +27,9 @@
         </svg>
       </button>
 
-      <button>
+      <button  @click="$router.push('/carrinho/' + id)">
         <!-- carrinho -->
+        
         <svg
           width="64"
           height="64"
@@ -118,14 +119,14 @@ export default {
   display: flex;
   justify-content: space-between;
   position: absolute;
-  margin-left: 500px;
+  /* margin-left: 500px; */
 }
 button {
   background: transparent;
   border-radius: 50%;
   height: 64px;
   width: 64px;
-  left: 30px;
+  /* left: 30px; */
   border: 1px solid transparent;
   cursor: pointer;
 }

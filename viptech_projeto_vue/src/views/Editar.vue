@@ -1,8 +1,12 @@
 <template>
   <div class="editar">
-    <h1>Editar produtos</h1>
+    <div class="nav">
+          <router-link class="link" to="/">Home</router-link>>
+          <router-link class="link" to="/editar/:id">Editar Produto</router-link>
+      </div>
+    <h1>Editar produto</h1>
 
-    <div>
+    <div id="form">
       <form @submit="update">
         <div class="text">
           <label>Nome do produto:</label>
@@ -37,10 +41,11 @@
           <input type="date" placeholder="00/00/0000" />
         </div>
         <div class="text">
-          <input type="file" />
+          <img :src="imagem" alt="imagem">
+          <input @change="handleImage" type="file" />
         </div>
         <div class="text">
-          <button type="submit">Adicionar Produto</button>
+          <button class="submit-btn" type="submit">SALVAR PRODUTO</button>
         </div>
       </form>
     </div>
@@ -57,6 +62,7 @@ export default {
       valor: 0,
       cor: "",
       id: this.$route.params.id,
+      imagem: "",
     };
   },
   mounted() {
@@ -67,6 +73,7 @@ export default {
           this.marca = res.data.marca;
           this.valor = res.data.valor;
           this.cor = res.data.cor;
+          this.imagem = res.data.imagem;
           console.log(res);
         })
         .catch((error) => {
@@ -90,21 +97,65 @@ export default {
           console.log(error);
         });
     },
+    handleImage(e) {
+      const selectedImage = e.target.files[0];
+      this.createBase64Image(selectedImage);
+    },
+    createBase64Image(fileObject){
+      fileObject.text().then(()=> {
+        const reader = new FileReader();
+        reader.readAsDataURL(fileObject);
+        reader.onload = () => {
+        this.imagem = reader.result;
+      };
+      })
+    },
   },
 };
 </script>
 <style scoped>
 #form {
-  max-width: 400px;
+  max-width: 550px;
   margin: 0 auto;
+  font-family: 'Raleway';
+ 
 }
 .text {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+   
 }
 label {
   font-weight: bold;
   margin-bottom: 15px;
+  color: #222;
+  padding: 5px 10px;
 }
+input, select {
+  padding: 5px 10px;
+}
+
+.submit-btn {
+  background-color: #00264B;
+  width: 150px;
+  height: 35px;
+  color: blanchedalmond;
+}
+.editar {
+  font-family: 'Raleway';
+}
+h1 {
+    font-family: 'Raleway';
+    margin-left: 390px;
+    margin-top: 60px;
+    margin-bottom: 50px;
+  }
+.nav {
+  margin-left: 15px;
+  margin-top: 20px;
+  flex-direction: row;
+  display: flex;
+}
+
 </style>

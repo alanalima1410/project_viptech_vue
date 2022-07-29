@@ -22,7 +22,16 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "editar" */ '../views/Editar.vue')
-  }
+  },
+  {
+    path: '/carrinho/:id',
+    name: 'carrinho',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "carrinho" */ '../views/Carrinho.vue')
+  },
+  
 ]
 
 const router = createRouter({
