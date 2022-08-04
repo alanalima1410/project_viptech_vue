@@ -26,6 +26,7 @@ h1 {
     margin-left: 390px;
     margin-top: 60px;
     margin-bottom: 50px;
+    margin-left: 250px;
   }
   .nav {
   margin-left: 15px;

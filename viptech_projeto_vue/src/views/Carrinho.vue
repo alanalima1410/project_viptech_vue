@@ -1,73 +1,73 @@
 <template>
-<div>
+  <div>
+    <div class="nav">
+      <router-link class="link" to="/">Home</router-link>>
+      <router-link class="link" to="/carrinho/:id">Carrinho</router-link>
+    </div>
     <div className="titulos">
-        <h1 className="title">Carrinho</h1>
-        <h2 className="titlepedido">Resumo do pedido</h2>
+      <h1 className="title">Carrinho</h1>
+      <h2 className="titlepedido">Resumo do pedido</h2>
     </div>
     <div class="conteudocarrinho">
-        <div class="carrinho">
-            <div class="borda">
-                <div class="getimagem">
-                    <img :src="this.imagem" alt="imagem">
-                </div>
-                <div className="descricao">
-                <h2>{{this.nome}}</h2>
-                <p>{{this.marca}}</p>
-                <p>Cor: {{this.cor}}</p>
-              </div>
-            
-            <br>
-            <div class="quantidade">
-              <h3>Quantidade: </h3>
-              <button
-                className="menos" v-on:click="counter -= 1"
+      <div class="carrinho">
+        <div class="borda">
+          <div class="getimagem">
+            <img :src="this.imagem" alt="imagem" />
+          </div>
+          <div className="descricao">
+            <h2>{{ this.nome }}</h2>
+            <p>{{ this.marca }}</p>
+            <p>Cor: {{ this.cor }}</p>
+          </div>
+
+          <br />
+          <div class="quantidade">
+            <h3>Quantidade:</h3>
+            <button className="menos" v-on:click="counter -= 1">
+              <svg
+                width="32"
+                height="33"
+                viewBox="0 0 32 33"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <svg
-                  width="32"
-                  height="33"
-                  viewBox="0 0 32 33"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M9 18.5V15.5H23V18.5H9Z" fill="#353535" />
-                  <circle cx="16" cy="16.5" r="15.5" stroke="#353535" />
-                </svg>
-              </button>
-              <div>
-                <input class="number" type="text" v-model="counter" >
-              </div>
-              <button
-                className="mais" v-on:click="counter += 1"
+                <path d="M9 18.5V15.5H23V18.5H9Z" fill="#353535" />
+                <circle cx="16" cy="16.5" r="15.5" stroke="#353535" />
+              </svg>
+            </button>
+            <div>
+              <input class="number" type="text" v-model="counter" />
+            </div>
+            <button className="mais" v-on:click="counter += 1">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <svg
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M17 17.5V23.5H15V17.5H9V15.5H15V9.5H17V15.5H23V17.5H17Z"
-                    fill="#353535"
-                  />
-                  <circle cx="16" cy="16" r="15.5" stroke="#353535" />
-                </svg>
-              </button>
-              <h4 class="valor">R${{this.valor * counter}},00</h4>
-            </div>
-            </div>
+                <path
+                  d="M17 17.5V23.5H15V17.5H9V15.5H15V9.5H17V15.5H23V17.5H17Z"
+                  fill="#353535"
+                />
+                <circle cx="16" cy="16" r="15.5" stroke="#353535" />
+              </svg>
+            </button>
+            <h4 class="valor">R${{ this.valor * counter }},00</h4>
+          </div>
         </div>
-          <div class="borda2">
-          <div class="pedido">
-            <h4>Subtotal R$ {{valor * counter}}</h4>
-            
-            <h4>Frete R$ {{(valor * counter)/10}}</h4>
-            
-            <h4>Valor Total R$ {{total()}}</h4>
-            
-            <button
-              class="btpagar" @click='toggle = !toggle'
-            >
+      </div>
+      <div class="borda2">
+        <div class="pedido">
+          <h4>Subtotal R$ {{ valor * counter }}</h4>
+          <p class="linha"></p>
+
+          <h4>Frete R$ {{ (valor * counter) / 10 }}</h4>
+          <p class="linha"></p>
+          <h4>Valor Total R$ {{ total() }}</h4>
+          <p class="linha"></p>
+          <div class="btpagar">
+            <button class="btpagar" @click="toggle = !toggle">
               <svg
                 class="pagar"
                 width="373"
@@ -85,26 +85,22 @@
             </button>
           </div>
         </div>
-        <div>
-            <div className="pagamento" v-show="toggle">
+      </div>
+      <div>
+        <div className="pagamento" v-show="toggle">
           <p>Pagamento realizado com sucesso!</p>
+          <p>Este ... </p>
           <h2>
-            <!-- {Object.entries(counterCedulas).map((it) => {
-              if (it[1] > 0)
-                return (
-                  <p>{`Este pagamento foi realizado com ${it[1]} cédulas de R$${it[0]}`}</p>
-                );
-            })}; -->
+            
           </h2>
         </div>
-        </div>
+      </div>
     </div>
-</div>
-    
+  </div>
 </template>
 <script>
 import api from "../services/api.js";
-import Pagamento from '../components/Pagamento.vue';
+import Pagamento from "../components/Pagamento.vue";
 export default {
   components: { Pagamento },
   name: "Editar",
@@ -121,91 +117,100 @@ export default {
       imagem: "",
       counter: 1,
       toggle: true,
+      it: [],
     };
   },
   mounted() {
-      api
-        .get("/produto/" + this.id)
-        .then((res) => {
-          this.nome = res.data.nome;
-          this.marca = res.data.marca;
-          this.valor = res.data.valor;
-          this.cor = res.data.cor;
-          this.imagem = res.data.imagem;
-          console.log(res);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-},
-  
+    api
+      .get("/produto/" + this.id)
+      .then((res) => {
+        this.nome = res.data.nome;
+        this.marca = res.data.marca;
+        this.valor = res.data.valor;
+        this.cor = res.data.cor;
+        this.imagem = res.data.imagem;
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
   methods: {
-        handleImage(e) {
+    handleImage(e) {
       const selectedImage = e.target.files[0];
       this.createBase64Image(selectedImage);
     },
-    createBase64Image(fileObject){
-      fileObject.text().then(()=> {
+    createBase64Image(fileObject) {
+      fileObject.text().then(() => {
         const reader = new FileReader();
         reader.readAsDataURL(fileObject);
         reader.onload = () => {
-        this.imagem = reader.result;
-      };
-      })
+          this.imagem = reader.result;
+        };
+      });
     },
     total() {
-      
-      const total = ((this.valor * this.counter)/10)+this.valor * this.counter;
+      const total =
+        (this.valor * this.counter) / 10 + this.valor * this.counter;
       return total;
     },
     pagamento(total) {
-    console.log(total);
-    const counterCedulas = {
-      200: 0,
-      100: 0,
-      50: 0,
-      20: 0,
-      10: 0,
-      5: 0,
-      2: 0,
-    };
-    var resto = total;
-    for (var c = Object.keys(counterCedulas).length - 1; c >= 0; c--) {
-      const currentCedula = Number(Object.keys(counterCedulas)[c]);
-      const div = Math.floor(resto / currentCedula);
-      counterCedulas[currentCedula] += div;
-      resto -= div * currentCedula;
-    }
-    return resto;
-    
+      console.log(total);
+      const counterCedulas = {
+        200: 0,
+        100: 0,
+        50: 0,
+        20: 0,
+        10: 0,
+        5: 0,
+        2: 0,
+      };
+      var resto = total;
+      for (var c = Object.keys(counterCedulas).length - 1; c >= 0; c--) {
+        const currentCedula = Object.keys(counterCedulas)[c];
+        const div = Math.floor(resto / currentCedula);
+        counterCedulas[currentCedula] += div;
+        resto -= div * currentCedula;
+        Object.entries(counterCedulas).map((it) => {
+              if (it[1] > 0)
+                return (
+                  ` ${it[1]} ${it[0]}`
+                );
+            })
+      }
+      return resto;
+      
+    },
   },
-  
- },
-  
-}
+};
 </script>
 <style scoped>
-
-.titulos{
-    margin-top: 40px;
-    margin-left: 150px;
-    flex-direction: row;
-    justify-content: space-between;
-    display: inline-flex;
-    width: 1070px;
-    font-family: Raleway;
-    
+.nav {
+  margin-left: 15px;
+  margin-top: 20px;
+  flex-direction: row;
+  display: flex;
+}
+.titulos {
+  margin-top: 40px;
+  margin-left: 150px;
+  flex-direction: row;
+  justify-content: space-between;
+  display: inline-flex;
+  width: 1070px;
+  font-family: Raleway;
 }
 .conteudocarrinho {
-    display:flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 .carrinho {
-    margin-left: 150px;
+  margin-left: 150px;
 }
 
-.borda{
-  border: 1px solid #B2B2B2;
+.borda {
+  border: 1px solid #b2b2b2;
   box-sizing: border-box;
   border-radius: 7px;
   width: 812px;
@@ -213,46 +218,45 @@ export default {
   display: flex;
   flex-direction: row;
 }
-.getimagem{
-    align-items: center;
-    padding: 25px;
-    height: 200px;
+.getimagem {
+  align-items: center;
+  padding: 25px;
+  height: 200px;
 }
-.descricao{
-    font-family: Raleway;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 14px;
-    align-items: center;
-    padding: 25px;
-    margin-top: 30px;
-    height: 200px;
+.descricao {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  align-items: center;
+  padding: 25px;
+  margin-top: 30px;
+  height: 200px;
 }
 .quantidade {
-    flex-direction: row;
-    display: flex;
-    margin-left: -250px;
-    font-family: Raleway;
-    margin-top: 300px;
+  flex-direction: row;
+  display: flex;
+  margin-left: -450px;
+  font-family: Raleway;
+  margin-top: 300px;
 }
-.menos{
-    border: none;
-    background: none;
+.menos {
+  border: none;
+  background: none;
 }
-.mais{
-    border: none;
-    background: none;
+.mais {
+  border: none;
+  background: none;
 }
 .valor {
-  margin-left: 460px;
+  margin-left: 340px;
   font-family: Raleway;
   font-size: 20px;
   padding: -45px;
-  
 }
-.borda2{
-  border: 0.3px solid #B2B2B2;
-  
+.borda2 {
+  border: 0.3px solid #b2b2b2;
+
   border-radius: 7px;
   width: 250px;
   height: 260px;
@@ -260,8 +264,10 @@ export default {
   margin-left: 30px;
   font-family: Raleway;
 }
-.pagar{
+.pagar {
   width: 230px;
+  align-items: center;
+  text-align: center;
 }
 .number {
   width: 20px;
@@ -269,21 +275,25 @@ export default {
   padding: 5px;
   margin-top: 12px;
 }
-.btpagar{
+.btpagar {
   border: none;
+  align-items: center;
+  text-align: center;
 }
 .pagamento {
-    border: 1px solid #039500;
-    box-sizing: border-box;
-    border-radius: 7px;
-    width: 425px;
-    height: 200px;
-    color: #039500;
-    margin-left: 30px;
-    position: absolute;
-    right: 80px;
-    top: 600px;
-    margin-bottom: 30px;
+  border: 1px solid #039500;
+  box-sizing: border-box;
+  border-radius: 7px;
+  width: 425px;
+  height: 200px;
+  color: #039500;
+  margin-left: 30px;
+  position: absolute;
+  right: 80px;
+  top: 600px;
+  margin-bottom: 30px;
 }
-
+.linha {
+  border: #ccc solid 1px;
+}
 </style>

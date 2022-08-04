@@ -28,7 +28,7 @@ export default {
 <style scoped>
   .home h1 {
     font-family: 'Raleway';
-    margin-left: 250px;
+    margin-left: 230px;
     margin-top: 70px;
   }
   .home{
@@ -46,9 +46,11 @@ export default {
     width: 200px;
     height: 35px;
     color:white;
-    margin-right: 85px;
+    margin-right: 170px;
     margin-top: 55px;
     font-family: 'Raleway';
+    border-radius: 7px;
+    font-weight: bold;
    
   }
   .icone{

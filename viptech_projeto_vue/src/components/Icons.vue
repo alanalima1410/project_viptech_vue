@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="todos">
     <div class="icon">
       <button @click="$router.push('/editar/' + id)">
         <!-- editar -->
@@ -27,9 +27,9 @@
         </svg>
       </button>
 
-      <button  @click="$router.push('/carrinho/' + id)">
+      <button @click="$router.push('/carrinho/' + id)">
         <!-- carrinho -->
-        
+
         <svg
           width="64"
           height="64"
@@ -92,6 +92,7 @@
             fill="#DB0000"
           />
         </svg>
+        <Message :msg="msg" v-show="msg" />
       </button>
     </div>
   </div>
@@ -99,25 +100,33 @@
 
 <script>
 import api from "../services/api.js";
+import Message from "../components/Message";
 export default {
   name: "Icons",
+  data() {
+    msg: null;
+  },
+  components: {
+    Message,
+  },
   props: ["id"],
   methods: {
-   deleteById() {
+    deleteById() {
       api.delete("/produto/" + this.id).then(() => {
         console.log("deletado com sucesso");
-
+        this.msg = "Produto atualizado com sucesso!";
+        alert("Produto removido com sucesso!")
+          window.location.reload();
       });
     },
-}
-}
+  },
+};
 </script>
 
 <style scoped>
 .icon {
   flex-direction: row;
   display: flex;
-  justify-content: space-between;
   position: absolute;
   /* margin-left: 500px; */
 }
@@ -129,5 +138,13 @@ button {
   /* left: 30px; */
   border: 1px solid transparent;
   cursor: pointer;
+  margin: 5px;
+  justify-content: space-between;
+}
+.todos {
+  margin-right: 200px;
+  justify-content: space-between;
+  
+
 }
 </style>
