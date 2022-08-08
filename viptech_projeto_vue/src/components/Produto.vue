@@ -69,8 +69,11 @@ export default {
 }
 .imagem {
   width: 150px;
-  height: 150px;
+  height: 180px;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 .descricao {
   width: 600px;

@@ -27,6 +27,9 @@ export default {
 <style>
 body {
     margin: 0;
+    -webkit-font-feature-settings: "lnum"; 
+    -moz-font-feature-settings: "lnum"; 
+    font-feature-settings: "lnum";
 }
 
 

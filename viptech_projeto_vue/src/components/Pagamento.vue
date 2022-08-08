@@ -1,24 +1,13 @@
-<template>
-    <div className="pagamento">
-          <p>Pagamento realizado com sucesso!</p>
-          <h2>
-            <!-- {Object.entries(openPagar).map((it) => {
-              if (it[1] > 0)
-                return (
-                  <p>{`Este pagamento foi realizado com ${it[1]} cédulas de R$${it[0]}`}</p>
-                );
-            })} -->
-          </h2>
-        </div>
-</template>
+<script setup>
+import { ref, onMounted }  from 'vue';
 
-<script>
+function total() {
+      const total =
+        (this.valor * this.counter) / 10 + this.valor * this.counter;
+      return total;
+    };
 
-export default {
-    name: "Pagamento",
-    methods: {
-
-    pagamento(total) {
+function pagamento(total) {
     console.log(total);
     setCedulas(true);
     const counterCedulas = {
@@ -39,23 +28,10 @@ export default {
     }
     setOpenPagar(counterCedulas);
     return resto;
-  },
-}
-}
+  };
 </script>
 
-<style scoped>
-.pagamento {
-    border: 1px solid #039500;
-    box-sizing: border-box;
-    border-radius: 7px;
-    width: 425px;
-    height: 200px;
-    color: #039500;
-    margin-left: 30px;
-    position: absolute;
-    right: 80px;
-    top: 600px;
-    margin-bottom: 30px;
-}
-</style>
+<template>
+  
+</template>
+ 

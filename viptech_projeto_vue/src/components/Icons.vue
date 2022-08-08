@@ -127,15 +127,14 @@ export default {
 .icon {
   flex-direction: row;
   display: flex;
+  align-items: center;
   position: absolute;
-  /* margin-left: 500px; */
 }
 button {
   background: transparent;
   border-radius: 50%;
-  height: 64px;
+  height: 170px;
   width: 64px;
-  /* left: 30px; */
   border: 1px solid transparent;
   cursor: pointer;
   margin: 5px;
@@ -144,7 +143,5 @@ button {
 .todos {
   margin-right: 200px;
   justify-content: space-between;
-  
-
 }
 </style>

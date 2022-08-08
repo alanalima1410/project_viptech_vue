@@ -11,67 +11,99 @@
     <div class="conteudocarrinho">
       <div class="carrinho">
         <div class="borda">
-          <div class="getimagem">
-            <img :src="this.imagem" alt="imagem" />
-          </div>
-          <div className="descricao">
-            <h2>{{ this.nome }}</h2>
-            <p>{{ this.marca }}</p>
-            <p>Cor: {{ this.cor }}</p>
+          <div class="produto">
+            <div class="getimagem">
+              <img :src="this.imagem" alt="imagem" />
+            </div>
+            <div className="descricao">
+              <h2>{{ this.nome }}</h2>
+              <p>{{ this.marca }}</p>
+              <p>Cor: {{ this.cor }}</p>
+            </div>
           </div>
 
-          <br />
+          <hr />
+
           <div class="quantidade">
-            <h3>Quantidade:</h3>
-            <button className="menos" v-on:click="counter -= 1">
-              <svg
-                width="32"
-                height="33"
-                viewBox="0 0 32 33"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M9 18.5V15.5H23V18.5H9Z" fill="#353535" />
-                <circle cx="16" cy="16.5" r="15.5" stroke="#353535" />
-              </svg>
-            </button>
-            <div>
-              <input class="number" type="text" v-model="counter" />
+            <div><h3>Quantidade:</h3></div>
+            <div class="botoes">
+              <button className="menos" v-on:click="counter -= 1">
+                <svg
+                  width="25"
+                  height="25"
+                  viewBox="0 0 32 33"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M9 18.5V15.5H23V18.5H9Z" fill="#353535" />
+                  <circle cx="16" cy="16.5" r="15.5" stroke="#353535" />
+                </svg>
+              </button>
+              <div class="counter">
+                <input class="number" type="text" v-model="counter" />
+              </div>
+              <button className="mais" v-on:click="counter += 1">
+                <svg
+                  width="25"
+                  height="25"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M17 17.5V23.5H15V17.5H9V15.5H15V9.5H17V15.5H23V17.5H17Z"
+                    fill="#353535"
+                  />
+                  <circle cx="16" cy="16" r="15.5" stroke="#353535" />
+                </svg>
+              </button>
             </div>
-            <button className="mais" v-on:click="counter += 1">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M17 17.5V23.5H15V17.5H9V15.5H15V9.5H17V15.5H23V17.5H17Z"
-                  fill="#353535"
-                />
-                <circle cx="16" cy="16" r="15.5" stroke="#353535" />
-              </svg>
-            </button>
             <h4 class="valor">R${{ this.valor * counter }},00</h4>
           </div>
         </div>
       </div>
       <div class="borda2">
         <div class="pedido">
-          <h4>Subtotal R$ {{ valor * counter }}</h4>
-          <p class="linha"></p>
+          <div class="subtitulo1">
+            <h4>Subtotal</h4>
+            <h4>R$ {{ valor * counter }}</h4>
+          </div>
+          <hr />
+          <div id="mouse" class="subtitulo2">
+            <h4>
+              Frete 
+              <svg id="mouse"
+                width="17"
+                height="14"
+                viewBox="0 0 17 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M17 8.5C17 13.1944 13.1944 17 8.5 17C3.80558 17 0 13.1944 0 8.5C0 3.80558 3.80558 0 8.5 0C13.1944 0 17 3.80558 17 8.5Z"
+                  fill="#FF6363"
+                />
+                <path
+                  d="M9.20898 6.66016V13H7.79102V6.66016H9.20898ZM7.69727 4.99609C7.69727 4.78125 7.76758 4.60352 7.9082 4.46289C8.05273 4.31836 8.25195 4.24609 8.50586 4.24609C8.75586 4.24609 8.95312 4.31836 9.09766 4.46289C9.24219 4.60352 9.31445 4.78125 9.31445 4.99609C9.31445 5.20703 9.24219 5.38281 9.09766 5.52344C8.95312 5.66406 8.75586 5.73438 8.50586 5.73438C8.25195 5.73438 8.05273 5.66406 7.9082 5.52344C7.76758 5.38281 7.69727 5.20703 7.69727 4.99609Z"
+                  fill="white"
+                />
+              </svg>
+            </h4>
+            <div id="mostrar">Valor do frete: 10% do valor do produto</div>
+            <h4>R$ {{ (valor * counter) / 10 }}</h4>
+          </div>
+          <hr />
+          <div class="subtitulo3">
+            <h4>Valor</h4>
+            <h4>Total R$ {{ total() }}</h4>
+          </div>
 
-          <h4>Frete R$ {{ (valor * counter) / 10 }}</h4>
-          <p class="linha"></p>
-          <h4>Valor Total R$ {{ total() }}</h4>
-          <p class="linha"></p>
           <div class="btpagar">
             <button class="btpagar" @click="toggle = !toggle">
               <svg
                 class="pagar"
                 width="373"
-                height="55"
+                height="47"
                 viewBox="0 0 373 55"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -89,10 +121,8 @@
       <div>
         <div className="pagamento" v-show="toggle">
           <p>Pagamento realizado com sucesso!</p>
-          <p>Este ... </p>
-          <h2>
-            
-          </h2>
+          <p>Este ...</p>
+          <h2></h2>
         </div>
       </div>
     </div>
@@ -173,14 +203,10 @@ export default {
         counterCedulas[currentCedula] += div;
         resto -= div * currentCedula;
         Object.entries(counterCedulas).map((it) => {
-              if (it[1] > 0)
-                return (
-                  ` ${it[1]} ${it[0]}`
-                );
-            })
+          if (it[1] > 0) return ` ${it[1]} ${it[0]}`;
+        });
       }
       return resto;
-      
     },
   },
 };
@@ -193,35 +219,42 @@ export default {
   display: flex;
 }
 .titulos {
-  margin-top: 40px;
-  margin-left: 150px;
+  margin-left: 120px;
   flex-direction: row;
   justify-content: space-between;
   display: inline-flex;
-  width: 1070px;
+  width: 1080px;
   font-family: Raleway;
 }
 .conteudocarrinho {
   display: flex;
-  flex-direction: row;
+  font-family: Raleway;
 }
 .carrinho {
-  margin-left: 150px;
+  margin-left: 110px;
+  display: flex;
+  flex-direction: column;
+  width: 812px;
+  height: 260px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-family: Raleway;
 }
 
-.borda {
-  border: 1px solid #b2b2b2;
-  box-sizing: border-box;
-  border-radius: 7px;
-  width: 812px;
-  height: 360px;
+.produto {
+  height: 200px;
   display: flex;
-  flex-direction: row;
+  width: 800px;
 }
 .getimagem {
   align-items: center;
+  display: flex;
+  justify-content: center;
   padding: 25px;
-  height: 200px;
+  height: 150px;
+  width: 150px;
 }
 .descricao {
   font-family: Raleway;
@@ -229,16 +262,29 @@ export default {
   font-weight: bold;
   font-size: 14px;
   align-items: center;
-  padding: 25px;
-  margin-top: 30px;
   height: 200px;
+  width: 800px;
+  margin-top: 30px;
 }
 .quantidade {
-  flex-direction: row;
-  display: flex;
-  margin-left: -450px;
   font-family: Raleway;
-  margin-top: 300px;
+  width: 800px;
+  height: 30px;
+  align-items: center;
+  display: flex;
+}
+.botoes {
+  width: 500px;
+  display: flex;
+}
+.counter input {
+  border-radius: 5px;
+  display: flex;
+  justify-items: center;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 8px;
 }
 .menos {
   border: none;
@@ -254,20 +300,10 @@ export default {
   font-size: 20px;
   padding: -45px;
 }
-.borda2 {
-  border: 0.3px solid #b2b2b2;
 
-  border-radius: 7px;
-  width: 250px;
-  height: 260px;
-  background: #f5f5f5;
-  margin-left: 30px;
-  font-family: Raleway;
-}
 .pagar {
   width: 230px;
-  align-items: center;
-  text-align: center;
+  margin-top: 10px;
 }
 .number {
   width: 20px;
@@ -285,15 +321,65 @@ export default {
   box-sizing: border-box;
   border-radius: 7px;
   width: 425px;
-  height: 200px;
+  height: inherit;
   color: #039500;
   margin-left: 30px;
   position: absolute;
-  right: 80px;
-  top: 600px;
+  right: 117px;
+  top: 480px;
   margin-bottom: 30px;
+  width: 265px;
+  padding: 10px;
+  text-align: center;
 }
 .linha {
   border: #ccc solid 1px;
+}
+.pedido {
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin-left: 20px;
+  height: 260px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: #f5f5f5;
+  padding-top: 5px;
+}
+.pedido h4 {
+  display: flex;
+  justify-content: space-between;
+}
+.subtitulo1 {
+  justify-content: space-between;
+  display: flex;
+  line-height: 5px;
+}
+.subtitulo2 {
+  justify-content: space-between;
+  display: flex;
+  line-height: 5px;
+}
+.subtitulo3 {
+  justify-content: space-between;
+  display: flex;
+  line-height: 5px;
+}
+#mouse{
+padding-top: 5px;
+}
+#mouse:hover #mostrar{
+  display: block;
+}
+#mostrar {
+  display: none;
+  position: absolute;
+  font-size: 12px;
+  background-color: white;
+  flex-direction: column;
+  padding: 10px;
+  box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.4);
+  margin-top: 40px;
+  font-weight: bold;
+
 }
 </style>
